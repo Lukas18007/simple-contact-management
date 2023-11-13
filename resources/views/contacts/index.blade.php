@@ -89,6 +89,26 @@
             background-color: #e74c3c;
             color: #fff;
         }
+
+        a.details {
+            color: green;
+        }
+
+        a.details:link {
+            text-decoration: none;
+        }
+
+        a.details:visited {
+            text-decoration: none;
+        }
+
+        a.details:hover {
+            text-decoration: underline;
+        }
+
+        a.details:active {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -98,7 +118,7 @@
     </div>
     <table>
         <tr>
-            <th>ID</th>
+            <th>ID (details)</th>
             <th>Name</th>
             <th>Contact</th>
             <th>Email</th>
@@ -107,15 +127,15 @@
         </tr>
         @foreach ($contacts as $contact)
             <tr>
-                <td>{{$contact->id}}</td>
+                <td><a href="{{route('contact.details', $contact->id)}}" title="see details" class="details">{{$contact->id}}</a></td>
                 <td>{{$contact->name}}</td>
                 <td>{{$contact->contact}}</td>
                 <td>{{$contact->email}}</td>
                 <td>
-                    <a href="{{route('contact.edit')}}" class="secondary-btn">EDIT</a>
+                    <a href="{{route('contact.edit', ['id' => $contact->id])}}" class="secondary-btn">EDIT</a>
                 </td>
                 <td>
-                    <form method="POST" action="{{ route('contact.delete', ['id' => $contact->id]) }}">
+                    <form method="POST" action="{{ route('contact.delete', $contact->id) }}">
                         @csrf
                         @method('DELETE')
                         <button class="danger-btn">DELETE</button>
