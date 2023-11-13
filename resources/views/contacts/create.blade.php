@@ -42,11 +42,11 @@
           background-color: #45a049;
         }
 
-        a.primary-btn {
+        a.danger-btn {
           width: 100%;
           background-color: #d80000;
           color: white;
-          padding: 14px 20px;
+          padding: 13px 20px;
           margin: 8px 0;
           border: none;
           border-radius: 4px;
@@ -56,7 +56,7 @@
           text-decoration: none;
         }
         
-        a.primary-btn:hover {
+        a.danger-btn:hover {
           background-color: #a10000;
         }
         
@@ -84,7 +84,7 @@
             <input type="email" name="email" id="email" required>
             
             <input type="submit" value="Submit">
-            <a class="primary-btn" href="{{ route('index') }}">Cancel</a>
+            <a class="danger-btn" href="{{ route('index') }}">Cancel</a>
         </form>
     </div>
 </body>
