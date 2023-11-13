@@ -14,7 +14,7 @@
             justify-content: center;
             text-align: center;
         }
-        
+
         input[type=text], input[type=email] {
           width: 100%;
           padding: 12px 20px;
@@ -72,18 +72,19 @@
         <h1>Create a contact</h1>
     </div>
     <div>
-        <form action="/action_page.php">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
-      
-          <label for="contact">Contact</label>
-          <input type="text" id="contact" name="contact" required>
-      
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" required>
+        <form action="{{ route('contact.create') }}" method="POST">
+            @csrf
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
         
-          <input type="submit" value="Submit">
-          <a class="primary-btn" href="{{ route('index') }}">Cancel</a>
+            <label for="contact">Contact</label>
+            <input type="text" id="contact" name="contact" required>
+        
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+            
+            <input type="submit" value="Submit">
+            <a class="primary-btn" href="{{ route('index') }}">Cancel</a>
         </form>
     </div>
 </body>
