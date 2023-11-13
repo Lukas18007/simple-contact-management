@@ -17,54 +17,54 @@
             }
             
             input[type=text], input[type=email] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
             }
             
             input[type=submit] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 0 auto;
-            max-width: 200px;
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin: 0 auto;
+                max-width: 200px;
             }
             
             input[type=submit]:hover {
-            background-color: #45a049;
+                background-color: #45a049;
             }
 
-            a.primary-btn {
-            width: 100%;
-            background-color: #d80000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 0 auto;
-            max-width: 200px;
-            text-decoration: none;
+            a.danger-btn {
+                width: 100%;
+                background-color: #d80000;
+                color: white;
+                padding: 13px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin: 0 auto;
+                max-width: 200px;
+                text-decoration: none;
             }
             
-            a.primary-btn:hover {
-            background-color: #a10000;
+            a.danger-btn:hover {
+                background-color: #a10000;
             }
             
             div {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
             }
         </style>
     </head>
@@ -73,18 +73,21 @@
             <h1>Edit a contact</h1>
         </div>
         <div>
-            <form action="/action_page.php">
+            <form action="{{ route('contact.update', $contact->id) }}" method="POST">
+                @METHOD('PUT')
+                @csrf
+
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required value="{{ old('name', $contact->name)}}">
             
                 <label for="contact">Contact</label>
-                <input type="text" id="contact" name="contact" required>
+                <input type="text" id="contact" name="contact" required value="{{ old('contact', $contact->contact)}}">
             
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" required value="{{ old('email', $contact->email)}}">
                 
                 <input type="submit" value="Submit">
-                <a class="primary-btn" href="{{ route('index') }}">Cancel</a>
+                <a class="danger-btn" href="{{ route('index') }}">Cancel</a>
             </form>
         </div>
     </body>
