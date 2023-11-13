@@ -15,6 +15,12 @@ class ContactController extends Controller
         return view('contacts.index', compact('contacts'));
     }
 
+    public function show(string|int $id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contacts.details', compact('contact'));
+    }
+
     public function create()
     {
         return view('contacts.create');
@@ -40,13 +46,44 @@ class ContactController extends Controller
             ->with('success', 'Contact created successfully!');
     }
 
-    public function edit() 
+    public function edit(string|int $id) 
     {
-        return view('contacts.edit');
+        $contact = Contact::findOrFail($id);
+        return view('contacts.edit', compact('contact'));
     }
 
-    public function delete()
+    public function update(Request $request, string|int $id) 
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:5',
+            'contact' => 'required|string|digits:9',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('contacts', 'email')->ignore($id),
+            ],
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->route('contact.edit', ["id" => $id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = $request->only(['name', 'contact', 'email']);
+
+        Contact::whereId($id)->update($data);
+
+        return redirect()->route('index')
+            ->with('success', 'Contact updated successfully!');
+    }
+
+    public function delete(string|int $id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return redirect()->route('index')
+            ->with('success', 'Contact deleted successfully!');
     }
 }
