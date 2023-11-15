@@ -67,13 +67,30 @@
                 padding: 20px;
             }
         </style>
+        <script>
+            function validateForm() {
+                var nameInput = document.getElementById('name');
+                var contactInput = document.getElementById('contact');
+                
+                if (nameInput.value.length < 5) {
+                    alert('The name must have at least 5 characters.');
+                    return false;
+                }
+                
+                if (contactInput.value.length != 9) {
+                    alert('The contact must have 9 characters.');
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <div class="head">
             <h1>Edit a contact</h1>
         </div>
         <div>
-            <form action="{{ route('contact.update', $contact->id) }}" method="POST">
+            <form action="{{ route('contact.update', $contact->id) }}" method="POST" onsubmit="return validateForm()">
                 @METHOD('PUT')
                 @csrf
 
