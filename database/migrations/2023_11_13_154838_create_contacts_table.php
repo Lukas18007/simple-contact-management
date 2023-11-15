@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE contacts MODIFY name VARCHAR(255) CHECK (LENGTH(name) > 5)');
+        DB::statement('ALTER TABLE contacts MODIFY name VARCHAR(255) CHECK (LENGTH(name) >= 5)');
 
         DB::statement('ALTER TABLE contacts ADD CONSTRAINT contacts_email CHECK (email REGEXP "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")');
     }
